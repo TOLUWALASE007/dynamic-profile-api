@@ -1,39 +1,77 @@
 # Dynamic Profile API
 
-A Node.js API that provides dynamic profile information with cat facts integration.
+A simple RESTful API that returns user profile information along with a dynamic cat fact 🐱.
 
-## Setup
+## 🚀 Endpoint
+**GET** `/me`
 
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-2. Start the development server:
-   ```bash
-   npm run dev
-   ```
-
-3. Start the production server:
-   ```bash
-   npm start
-   ```
-
-## Environment Variables
-
-Create a `.env` file with:
-```
-PORT=3000
+### Example Response
+```json
+{
+  "status": "success",
+  "user": {
+    "email": "toluwalaseemmanuel20@gmail.com",
+    "name": "Toluwalase Olaniyan",
+    "stack": "Node.js/Express"
+  },
+  "timestamp": "2025-10-17T12:34:56.789Z",
+  "fact": "Cats can rotate their ears 180 degrees."
+}
 ```
 
-## Project Structure
+## 🧰 Installation & Setup
+
+```bash
+git clone https://github.com/<your-username>/dynamic-profile-api.git
+cd dynamic-profile-api
+npm install
+npm run dev
+```
+
+## ⚙️ Environment Variables
+
+Create a `.env` file:
+
+```
+PORT=3001
+```
+
+## 🧪 Testing
+
+Visit: `http://localhost:3001/me`
+
+## 🛠️ Available Scripts
+
+- `npm run dev` - Start development server with auto-restart
+- `npm start` - Start production server
+- `npm test` - Run tests (placeholder)
+
+## 📦 Dependencies
+
+- **express** - Web framework for Node.js
+- **axios** - HTTP client for API requests
+- **cors** - Cross-Origin Resource Sharing middleware
+- **dotenv** - Environment variable management
+- **nodemon** - Development auto-restart tool
+
+## 🏗️ Project Structure
 
 ```
 dynamic-profile-api/
-├── node_modules/
-├── .env
-├── .gitignore
-├── package.json
-├── server.js
-└── README.md
+├── node_modules/          # Dependencies
+├── .env                   # Environment variables
+├── .gitignore            # Git ignore rules
+├── package.json          # Project metadata & scripts
+├── package-lock.json     # Dependency lock file
+├── server.js             # Main server file
+└── README.md             # Project documentation
 ```
+
+## 🔧 Features
+
+- ✅ Dynamic cat facts from external API
+- ✅ Graceful error handling
+- ✅ CORS enabled for cross-origin requests
+- ✅ Request logging middleware
+- ✅ Environment-based configuration
+- ✅ Clean, production-ready code
