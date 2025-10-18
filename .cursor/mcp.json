@@ -3,7 +3,7 @@
     "heroku": {
       "command": "npx -y @heroku/mcp-server",
       "env": {
-        "HEROKU_API_KEY": "HRKU-AA0Q5BUKX17KvxNVjk8UAgZ0KOy6FZSE2-V6d5SCETcA_____w-nhi3jF798"
+        "HEROKU_API_KEY": "${HEROKU_API_KEY}"
       }
     }
   }

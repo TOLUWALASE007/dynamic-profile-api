@@ -34,7 +34,13 @@ Create a `.env` file:
 
 ```
 PORT=3001
+HEROKU_API_KEY=your_heroku_api_key_here
 ```
+
+### For Heroku MCP Server Integration:
+1. Get your Heroku API key from [Heroku Dashboard](https://dashboard.heroku.com/account)
+2. Set the `HEROKU_API_KEY` environment variable
+3. The `.cursor/mcp.json` file is configured to use this environment variable
 
 ## 🧪 Testing
 
