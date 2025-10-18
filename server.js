@@ -22,6 +22,11 @@ app.use((req, res, next) => {
 // Define port (Pxxl App sets this automatically)
 const PORT = process.env.PORT || 3000;
 
+// Favicon endpoint
+app.get('/favicon.ico', (req, res) => {
+  res.status(204).end();
+});
+
 // Root endpoint
 app.get('/', (req, res) => {
   res.json({
@@ -90,4 +95,25 @@ const server = app.listen(PORT, '0.0.0.0', () => {
 server.on('error', (error) => {
   console.error('Server error:', error);
   process.exit(1);
+});
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught Exception:', error);
+  process.exit(1);
+});
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  process.exit(1);
+});
+
+// Graceful shutdown
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received, shutting down gracefully');
+  server.close(() => {
+    console.log('Process terminated');
+    process.exit(0);
+  });
 });
