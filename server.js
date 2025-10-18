@@ -19,7 +19,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Define port
+// Define port (Heroku sets this automatically)
 const PORT = process.env.PORT || 3001;
 
 // /me endpoint

@@ -1,0 +1,26 @@
+{
+  "name": "dynamic-profile-api",
+  "description": "A Node.js API that returns user profile information with dynamic cat facts",
+  "repository": "https://github.com/TOLUWALASE007/dynamic-profile-api",
+  "logo": "https://nodejs.org/static/images/logo.svg",
+  "keywords": ["node", "express", "api", "cat-facts"],
+  "image": "heroku/nodejs",
+  "stack": "heroku-22",
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "env": {
+    "NODE_ENV": {
+      "description": "Environment for the application",
+      "value": "production"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  }
+}
