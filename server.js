@@ -22,6 +22,15 @@ app.use((req, res, next) => {
 // Define port (Heroku sets this automatically)
 const PORT = process.env.PORT || 3001;
 
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ 
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime()
+  });
+});
+
 // /me endpoint
 app.get('/me', async (req, res) => {
   try {
@@ -59,6 +68,6 @@ app.get('/me', async (req, res) => {
 });
 
 // Start server
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 Server running on http://0.0.0.0:${PORT}`);
 });
