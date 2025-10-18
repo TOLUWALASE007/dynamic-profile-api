@@ -19,8 +19,20 @@ app.use((req, res, next) => {
   next();
 });
 
-// Define port (Heroku sets this automatically)
-const PORT = process.env.PORT || 3001;
+// Define port (Pxxl App sets this automatically)
+const PORT = process.env.PORT || 3000;
+
+// Root endpoint
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Dynamic Profile API is running!',
+    endpoints: {
+      profile: '/me',
+      health: '/health'
+    },
+    timestamp: new Date().toISOString()
+  });
+});
 
 // Health check endpoint
 app.get('/health', (req, res) => {
@@ -68,6 +80,14 @@ app.get('/me', async (req, res) => {
 });
 
 // Start server
-app.listen(PORT, '0.0.0.0', () => {
+const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Server running on http://0.0.0.0:${PORT}`);
+  console.log(`📊 Health check: http://0.0.0.0:${PORT}/health`);
+  console.log(`👤 Profile API: http://0.0.0.0:${PORT}/me`);
+});
+
+// Handle server errors
+server.on('error', (error) => {
+  console.error('Server error:', error);
+  process.exit(1);
 });
