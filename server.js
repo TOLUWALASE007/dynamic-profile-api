@@ -13,8 +13,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Define port
-const PORT = process.env.PORT || 3000;
+// Define port (Pxxl App uses PORT environment variable)
+const PORT = process.env.PORT || 8080;
 
 // Favicon endpoint
 app.get('/favicon.ico', (req, res) => {
@@ -81,6 +81,12 @@ app.get('/me', async (req, res) => {
 // Start server
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`🌐 Available endpoints:`);
+  console.log(`   - GET / (root)`);
+  console.log(`   - GET /me (profile API)`);
+  console.log(`   - GET /health (health check)`);
+  console.log(`   - GET /favicon.ico (favicon)`);
 });
 
 // Export for testing
