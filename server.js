@@ -13,13 +13,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Basic logging middleware
-app.use((req, res, next) => {
-  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
-  next();
-});
-
-// Define port (Pxxl App sets this automatically)
+// Define port
 const PORT = process.env.PORT || 3000;
 
 // Favicon endpoint
@@ -85,35 +79,9 @@ app.get('/me', async (req, res) => {
 });
 
 // Start server
-const server = app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🚀 Server running on http://0.0.0.0:${PORT}`);
-  console.log(`📊 Health check: http://0.0.0.0:${PORT}/health`);
-  console.log(`👤 Profile API: http://0.0.0.0:${PORT}/me`);
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
 });
 
-// Handle server errors
-server.on('error', (error) => {
-  console.error('Server error:', error);
-  process.exit(1);
-});
-
-// Handle uncaught exceptions
-process.on('uncaughtException', (error) => {
-  console.error('Uncaught Exception:', error);
-  process.exit(1);
-});
-
-// Handle unhandled promise rejections
-process.on('unhandledRejection', (reason, promise) => {
-  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
-  process.exit(1);
-});
-
-// Graceful shutdown
-process.on('SIGTERM', () => {
-  console.log('SIGTERM received, shutting down gracefully');
-  server.close(() => {
-    console.log('Process terminated');
-    process.exit(0);
-  });
-});
+// Export for testing
+module.exports = app;
