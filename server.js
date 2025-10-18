@@ -13,8 +13,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Define port (Pxxl App uses PORT environment variable)
-const PORT = process.env.PORT || 8080;
+// Define port (Pxxl App sets PORT automatically)
+const PORT = process.env.PORT || 3000;
 
 // Favicon endpoint
 app.get('/favicon.ico', (req, res) => {
@@ -78,8 +78,17 @@ app.get('/me', async (req, res) => {
   }
 });
 
+// Catch-all route for undefined endpoints
+app.get('*', (req, res) => {
+  res.status(404).json({
+    error: 'Endpoint not found',
+    message: 'Available endpoints: /, /me, /health',
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Start server
-app.listen(PORT, () => {
+const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`🌐 Available endpoints:`);
@@ -87,6 +96,12 @@ app.listen(PORT, () => {
   console.log(`   - GET /me (profile API)`);
   console.log(`   - GET /health (health check)`);
   console.log(`   - GET /favicon.ico (favicon)`);
+});
+
+// Handle server errors
+server.on('error', (error) => {
+  console.error('Server error:', error);
+  process.exit(1);
 });
 
 // Export for testing
